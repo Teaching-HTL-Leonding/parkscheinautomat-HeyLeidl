@@ -7,6 +7,9 @@ float temp = 0;
 int minutes = 0;
 int hours = 0;
 
+PrintWelcome();
+EnterCoins();
+AddParkingTime();
 
 void PrintWelcome()
 
@@ -86,46 +89,51 @@ void EnterCoins()
 
 }
 
-void AddParkingTime
+void AddParkingTime()
 {
     switch (moneyTemp)
     {
-        case "2";
-        paringTime += 120;
+        case "2":
+        parkingTime += 120;
 
         default;
         break;
 
-        case "1";
-        paringTime += 60;
+        case "1":
+        parkingTime += 60;
 
         default;
         break;
 
-        case "0.50";
-        paringTime += 30;
+        case "0.50":
+        parkingTime += 30;
 
         default;
         break;
 
-        case "0.20";
-        paringTime += 12;
+        case "0.20":
+        parkingTime += 12;
 
         default;
         break;
                 
-        case "0.10";
-        paringTime += 6;
+        case "0.10":
+        parkingTime += 6;
 
         default;
         break;
 
-        case "0.05";
-        paringTime += 3;
+        case "0.05":
+        parkingTime += 3;
 
         default;
         break;
     }
+
+}
+
+void PrintParkingTime()
+{
 
 }
 
