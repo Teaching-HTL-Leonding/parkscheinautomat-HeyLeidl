@@ -1,147 +1,494 @@
-﻿Console.Clear();
-int parkingTime = 0;
-int coins = 0;
-float amount = 0;
-float moneyTemp = 0;
-float temp = 0;
-int minutes = 0;
-int hours = 0;
+﻿int moneyValue = 100;
+int cardValue = 0;
+int dealerCardValue = 0;
+int round = 0;
+int MoneyPlayer = 100;
+int oldCardValue = 0;
+int yourBet;
+int oldDealerCardValue = 0;
+const int minimum_bet = 10;
+string card = "";
+string input;
+bool continuePlaying = true;
+bool DealerWins = true;
+bool playerWins = false;
+bool moneyDoubled = true;
 
-PrintWelcome();
-EnterCoins();
-AddParkingTime();
+
+
+
+void newRound()
+{
+    round++;
+}
 
 void PrintWelcome()
-
 {
-    Console.Write("Dear customer, please put in coins, 50 (Cents), 10 (Cents), 20 (Cents), 50 (Cents), 1 (Euro), 2 (Euro)");
-    Console.WriteLine("Zulässige Münzen: 50 (Cents), 10 (Cents), 20 (Cents), 50 (Cents), 1 (Euro), 2 (Euro)");
-    Console.WriteLine("Parkschein drucken mit d oder D");
+    Console.WriteLine("Welcome to Blackjack");
+    Console.WriteLine("");
+    Console.Write("You have 100$ in your pocket!");
+    Console.Write("");
+    Console.Write("You lose if you don't have any money left");
 }
 
+void PrintRound()
+{
+    Console.WriteLine($"You are in the {round} round now and have {MoneyPlayer}$ left");
+}
 
-void EnterCoins()
+void HandoutRandomPlayerCard()
+{
+    cardValue = Random.Shared.Next(1, 13);
+    string cardName = "";
+
+    switch (cardValue)
+    {
+        case 1:
+            card = "Ace";
+            cardName = "ace";
+            break;
+
+        case 2:
+            card = "2";
+            break;
+
+        case 3:
+            card = "3";
+            break;
+
+        case 4:
+            card = "4";
+            break;
+
+        case 5:
+            card = "5";
+            break;
+
+        case 6:
+            card = "6";
+            break;
+
+        case 7:
+            card = "7";
+            break;
+
+        case 8:
+            card = "8";
+            break;
+
+        case 9:
+            card = "9";
+            break;
+
+        case 10:
+            card = "10";
+            break;
+
+        case 11:
+            card = "11";
+            cardName = "jack";
+            break;
+
+        case 12:
+            card = "12";
+            cardName = "queen";
+            break;
+
+        case 13:
+            card = "13";
+            cardName = "king";
+
+            break;
+    }
+
+    cardValue += oldCardValue;
+
+
+
+
+}
+
+void HandoutRandomDealerCard()
+{
+    cardValue = Random.Shared.Next(1, 13);
+    string cardName = "";
+
+    switch (dealerCardValue)
+    {
+        case 1:
+            card = "Ace";
+            cardName = "ace";
+            break;
+
+        case 2:
+            card = "2";
+            break;
+
+        case 3:
+            card = "3";
+            break;
+
+        case 4:
+            card = "4";
+            break;
+
+        case 5:
+            card = "5";
+            break;
+
+        case 6:
+            card = "6";
+            break;
+
+        case 7:
+            card = "7";
+            break;
+
+        case 8:
+            card = "8";
+            break;
+
+        case 9:
+            card = "9";
+            break;
+
+        case 10:
+            card = "10";
+            break;
+
+        case 11:
+            card = "11";
+            cardName = "jack";
+            break;
+
+        case 12:
+            card = "12";
+            cardName = "queen";
+            break;
+
+        case 13:
+            card = "13";
+            cardName = "king";
+
+            break;
+
+
+
+    }
+
+    dealerCardValue += oldDealerCardValue;
+
+
+
+
+}
+
+void PrintPlayerCard()
+{
+    string cardName = "";
+
+    switch (cardValue)
+    {
+        case 1:
+            card = "Ace";
+            cardName = "ace";
+            break;
+
+        case 2:
+            card = "2";
+            break;
+
+        case 3:
+            card = "3";
+            break;
+
+        case 4:
+            card = "4";
+            break;
+
+        case 5:
+            card = "5";
+            break;
+
+        case 6:
+            card = "6";
+            break;
+
+        case 7:
+            card = "7";
+            break;
+
+        case 8:
+            card = "8";
+            break;
+
+        case 9:
+            card = "9";
+            break;
+
+        case 10:
+            card = "10";
+            break;
+
+        case 11:
+            card = "11";
+            cardName = "jack";
+            break;
+
+        case 12:
+            card = "12";
+            cardName = "queen";
+            break;
+
+        case 13:
+            card = "13";
+            cardName = "king";
+
+            break;
+
+
+
+    }
+
+    if (cardValue >= 2 || cardValue <= 10)
+    {
+        Console.WriteLine($"Your card has  the number {card}");
+    }
+
+
+
+    else if (cardValue == 11 || cardValue <= 13 || cardValue == 1)
+    {
+        Console.WriteLine($"Your card has  the number {card} and the name {cardName}  ");
+    }
+
+
+
+}
+
+void PrintDealerCard()
+{
+    string cardName = "";
+
+    switch (cardValue)
+    {
+        case 1:
+            card = "Ace";
+            cardName = "ace";
+            break;
+
+        case 2:
+            card = "2";
+            break;
+
+        case 3:
+            card = "3";
+            break;
+
+        case 4:
+            card = "4";
+            break;
+
+        case 5:
+            card = "5";
+            break;
+
+        case 6:
+            card = "6";
+            break;
+
+        case 7:
+            card = "7";
+            break;
+
+        case 8:
+            card = "8";
+            break;
+
+        case 9:
+            card = "9";
+            break;
+
+        case 10:
+            card = "10";
+            break;
+
+        case 11:
+            card = "11";
+            cardName = "jack";
+            break;
+
+        case 12:
+            card = "12";
+            cardName = "queen";
+            break;
+
+        case 13:
+            card = "13";
+            cardName = "king";
+
+            break;
+
+
+
+    }
+
+    if (cardValue >= 2 || cardValue <= 10)
+    {
+        Console.WriteLine($"Your card has  the number {card}");
+    }
+
+
+
+    else if (cardValue == 11 || cardValue == 13 || cardValue == 1 || cardValue == 12)
+    {
+        Console.WriteLine($"Your card has  the number {card} and the name {cardName}  ");
+    }
+
+
+
+}
+
+void AskForBet()
 {
 
+    Console.WriteLine("How much money do you want to bet? The minimum amonut is 10$ an the maximum amount is the amount of your left money!");
+    yourBet = int.Parse(Console.ReadLine()!);
+
+    if (yourBet < minimum_bet)
+    {
+
+    }
+}
+
+void AskForCard()
+{
+
+
+    int temp = 0;
     do
     {
-
-        System.Console.WriteLine("Put in 5(Cents), 10(Cents), 20(Cents), 50(Cents), 1(Euro), 2(Euro).");
-        string input = Console.ReadLine()!;
-
-        switch (input)
+        Console.WriteLine("Do you want another card? yes or no?");
+        input = Console.ReadLine()!;
+        if (input == "yes")
         {
-
-            case "5":
-                input += 0.05;
-                break;
-
-            case "10":
-                input += 0.10;
-                break;
-
-            case "20":
-                input += 0.20;
-                break;
-
-            case "50":
-                input += 0.50;
-                break;
-
-            case "1":
-                input += 1;
-                break;
-
-            case "2":
-                input += 2;
-                break;
-
-
-
-            case "D":
-                if (amount < 0.5f)
-                {
-                    float moneyTemp2 = amount * 100;
-                    System.Console.WriteLine($"Min.Input 50 Cent, you put in: {moneyTemp2} Cent ");
-                }
-                { moneyTemp = 0; }
-                break;
-
-            case "d":
-                if (amount < 0.5f)
-                {
-                    float moneyTemp2 = amount * 100;
-                    System.Console.WriteLine($"Minimal Input is 50 Cent, you put in: {moneyTemp2} Cent ");
-                }
-                { moneyTemp = 0; }
-                break;
-
-            default:
-                System.Console.WriteLine("Put in another coin");
-                temp = 1;
-                break;
+            continuePlaying = true;
+            temp = 0;
 
         }
-    }
-    while (temp == 1);
+        else if (input == "no")
+        {
+            continuePlaying = false;
+            temp = 0;
+        }
+        else
+        {
+            temp = 1;
+        }
 
 
-
+    } while (temp == 1);
 }
 
-void AddParkingTime()
+void DetermineWinner()
 {
-    switch (moneyTemp)
+    if (cardValue > 21)
     {
-        case "2":
-        parkingTime += 120;
-
-        default;
-        break;
-
-        case "1":
-        parkingTime += 60;
-
-        default;
-        break;
-
-        case "0.50":
-        parkingTime += 30;
-
-        default;
-        break;
-
-        case "0.20":
-        parkingTime += 12;
-
-        default;
-        break;
-                
-        case "0.10":
-        parkingTime += 6;
-
-        default;
-        break;
-
-        case "0.05":
-        parkingTime += 3;
-
-        default;
-        break;
+        DealerWins = true;
+        if (DealerWins)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("You busted, Dealer won!");
+        }
     }
-
-}
-
-void PrintParkingTime()
-{
-
-}
-
-void PrintDonation()
-{
-    float donation = parkingTime - moneyTemp;
-    if (parkingTime < moneyTemp)
+    else if (dealerCardValue > 21)
     {
-        System.Console.WriteLine($"Donation: {donation}");
+        playerWins = true;
+        moneyValue += 2 * yourBet;
+        if (playerWins)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("Dealer busted, You won!");
+        }
+    }
+    else if (dealerCardValue > cardValue)
+    {
+        DealerWins = true;
+        if (DealerWins)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("You busted, Dealer won!");
+        }
+    }
+    else if (cardValue > dealerCardValue)
+    {
+        playerWins = true;
+        moneyValue += 2 * yourBet;
+        if (playerWins)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("Dealer busted, You won!");
+        }
+    }
+    else
+    {
+        System.Console.WriteLine();
+        System.Console.WriteLine("Standoff");
+        moneyValue += yourBet;
+    }
+
+
+}
+void CheckIfMoneyDoubled()
+{
+    if (moneyValue >= 200)
+    {
+        moneyDoubled = true;
     }
 }
+void GameLogic()
+{
+    HandoutRandomPlayerCard();
+    PrintPlayerCard();
+}
+PrintWelcome();
+do
+{
+
+    newRound();
+    PrintRound();
+
+    HandoutRandomPlayerCard();
+    PrintPlayerCard();
+    AskForBet();
+    HandoutRandomPlayerCard();
+    PrintDealerCard();
+    AskForCard();
+    if (input == "yes")
+    {
+       GameLogic();
+    }
+    if (cardValue < 22 || input == "no")
+    {
+        Console.WriteLine("Dealer's turn...");
+
+        HandoutRandomDealerCard();
+        PrintDealerCard();
+
+        DetermineWinner();
+        CheckIfMoneyDoubled();
+        dealerCardValue = 0;
+        cardValue = 0;
+    }
+    while (moneyDoubled == false && moneyValue > 0) ;
+
+
+    if (moneyDoubled)
+    {
+        System.Console.WriteLine($"You won, you now have {moneyValue}");
+    }
+    else
+    {
+        System.Console.WriteLine("You lost!");
+    }
+}while(moneyValue !< 10 || moneyDoubled == false );
